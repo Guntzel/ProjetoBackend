@@ -1,0 +1,34 @@
+﻿@model IEnumerable<ProjetoBackend.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Meus Documentos";
+}
+
+<h1>Meus Documentos</h1>
+<a asp-action="Adicionar" class="btn btn-primary mb-3">Adicionar Documento</a> <!-- Botão de Adicionar -->
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Arquivo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var documento in Model)
+        {
+            <tr>
+                <td>@documento.Nome</td>
+                <td>@documento.Email</td>
+                <td><img src="@documento.ImagePath" class="ProfileImage" alt=""></td>
+                <td>
+                    <a asp-action="Editar" asp-route-id="@documento.Id" class="btn btn-warning">Editar</a>
+                    <form asp-action="Excluir" asp-controller="Usuario" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@documento.Id" />
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

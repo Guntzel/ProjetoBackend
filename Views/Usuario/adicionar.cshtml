@@ -1,0 +1,41 @@
+@model ProjetoBackend.Models.Usuario
+
+@{
+    ViewData["Title"] = "Cadastrar Usuario";
+}
+
+<h1>Adicionar</h1>
+
+<form asp-action="Adicionar" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="Titulo">Nome</label>
+        <br>
+        <input asp-for="Nome" maxlength="100" />
+        <span asp-validation-for="Nome" class="text-danger"></span> <!-- Exibe erros do campo Titulo -->
+    </div>
+    <div>
+        <label for="Descricao">E-mail</label>
+        <br>
+        <input asp-for="Email" maxlength="200">
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+        <div>
+        <label for="Senha">Senha</label>
+        <br>
+        <input asp-for="Senha" maxlength="100" type="password" />
+        <span asp-validation-for="Senha" class="text-danger"></span>
+    </div>
+    <div>
+        <label for="Arquivo">Upload do Arquivo</label>
+        <br>
+        <input type="file" name="Arquivo" /> <!-- O campo de upload não usa asp-for -->
+        <span class="text-danger">
+            @ViewData.ModelState["Arquivo"]?.Errors.FirstOrDefault()?.ErrorMessage
+        </span>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
